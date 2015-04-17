@@ -26,7 +26,7 @@ void TextEditor::selectText(int begin, int length)
 void TextEditor::searchInit()
 {
 	this->indexesBuffer.clear();
-	ui->countOfFindedLineEdit->setText("0");
+	ui->countOfFoundLineEdit->setText("0");
 	this->selectedIndex = -1;
 }
 
@@ -51,7 +51,7 @@ void TextEditor::on_searchLine_textChanged(const QString &searchedData)
 		if (entranceIndex >= 0)
 		{
 			int count = ui->textEdit->toPlainText().count(searchedData);
-			ui->countOfFindedLineEdit->setText(QString::number(count));
+			ui->countOfFoundLineEdit->setText(QString::number(count));
 			this->lengthOfSearched = searchedData.length();
 			this->selectedIndex = 0;
 
