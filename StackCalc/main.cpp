@@ -1,11 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
+\
+#include <QtTest>
+
 #include "linkedstack.h"
 #include "calcstack.h"
-
 #include "staccalctest.h"
-#include <QtTest>
 
 using namespace std;
 

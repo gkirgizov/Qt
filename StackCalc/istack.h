@@ -1,14 +1,14 @@
 #pragma once
 
 template<class T>
-class Stack
+class IStack
 {
 public:
 	///
 	/// \brief push
 	/// Add data to the stack
 	///
-    virtual void push(T *data) = 0;
+	virtual void push(T data) = 0;
 
 	///
 	/// \brief pop
@@ -23,13 +23,11 @@ public:
     virtual T top() = 0;
 
 	///
-	/// \brief getSize
+	/// \brief size
 	/// Returns number of items in the stack
 	///
-    virtual int getSize() = 0;
-
-    virtual ~Stack(){}
+	virtual int size() = 0;
 
 private:
-    int size;
+	int size_;
 };

@@ -18,5 +18,5 @@ qtcAddDeployment()
 HEADERS += \
     calcstack.h \
     linkedstack.h \
-    stack.h \
-    staccalctest.h
+    staccalctest.h \
+    istack.h

@@ -9,6 +9,7 @@
 class StacCalcTest : public QObject
 {
 	Q_OBJECT
+
 private slots:
-	void separatorTest();
+	void separateTest();
 };

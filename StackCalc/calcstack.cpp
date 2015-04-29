@@ -1,42 +1,37 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "stack.h"
+
+#include "istack.h"
 #include "linkedstack.h"
 #include "calcstack.h"
 
 using namespace std;
 
-///
-/// \brief doOperation
-/// Do operation 'key' with the operands 'first' and 'second'
-///
-int doOperation(char key, int first, int second)
+int CalcStack::calculate(string const &inputString)
 {
-    if (key == '+')
+	IStack<int> *stack = new LinkedStack<int>();
+	vector<string> tokens = separate(inputString);
+
+    for(const string &token : tokens)
     {
-        return first + second;
+		if (isOperator(token))
+        {
+			int second = stack->pop();
+			int first = stack->pop();
+			stack->push(doOperation(token[0], first, second));
+        }
+        else if (isNumber(token))
+        {
+			stack->push(stoi(token));
+        }
     }
-    else if (key == '-')
-    {
-        return first - second;
-    }
-    else if (key == '*')
-    {
-        return first * second;
-    }
-	else if (key == '/')
-    {
-        return first / second;
-    }
-	return 0;
+    int result = stack->top();
+    delete stack;
+    return result;
 }
 
-///
-/// \brief separator
-/// Splits string to the tokens
-///
-vector<string> separator(string const &inputString)
+vector<string> CalcStack::separate(string const &inputString)
 {
 	vector<string> tokens;
 	int begin = 0;
@@ -60,49 +55,47 @@ vector<string> separator(string const &inputString)
 	return tokens;
 }
 
-bool isOperator(string const &token)
+int CalcStack::doOperation(char key, int first, int second)
+{
+	if (key == '+')
+	{
+		return first + second;
+	}
+	else if (key == '-')
+	{
+		return first - second;
+	}
+	else if (key == '*')
+	{
+		return first * second;
+	}
+	else if (key == '/')
+	{
+		return first / second;
+	}
+	return 0;
+}
+
+bool CalcStack::isOperator(string const &token)
 {
 	if (token.size() == 1)
-    {
-        return (token[0] == '+' ||
-            token[0] == '-' ||
-            token[0] == '*' ||
-            token[0] == '/');
-    }
-    return false;
+	{
+		return (token[0] == '+' ||
+			token[0] == '-' ||
+			token[0] == '*' ||
+			token[0] == '/');
+	}
+	return false;
 }
 
-bool isNumber(string const &token)
+bool CalcStack::isNumber(string const &token)
 {
 	for (unsigned int i = 0; i < token.size(); ++i)
-    {
-        if (!(token[i] >= '0' && token[i] <= '9'))
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
-int calculate(string const &inputString)
-{
-    Stack<int> *stack = new LinkedStack<int>();
-    vector<string> tokens = separator(inputString);
-
-    for(const string &token : tokens)
-    {
-        if (isOperator(token))
-        {
-			int second = stack->pop();
-			int first = stack->pop();
-			stack->push(new int (doOperation(token[0], first, second)));
-        }
-        else if (isNumber(token))
-        {
-			stack->push(new int (stoi(token)));
-        }
-    }
-    int result = stack->top();
-    delete stack;
-    return result;
+	{
+		if (!(token[i] >= '0' && token[i] <= '9'))
+		{
+			return false;
+		}
+	}
+	return true;
 }
