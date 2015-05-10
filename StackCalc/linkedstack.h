@@ -7,7 +7,6 @@ class LinkedStack : public IStack<T>
 {
 public:
 	LinkedStack() :
-		size_(0),
 		head(nullptr) {}
 
 	~LinkedStack()
@@ -35,17 +34,12 @@ public:
         return returned;
     }
 
-    T top()
+	T top() const
     {
 		return this->head->data;
     }
 
-	int size()
-    {
-		return this->size_;
-    }
-
-private:
+protected:
     class Item
     {
     public:
@@ -58,5 +52,4 @@ private:
     };
 
     Item *head;
-	int size_;
 };

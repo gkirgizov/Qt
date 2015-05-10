@@ -4,6 +4,11 @@ template<class T>
 class IStack
 {
 public:
+	IStack() :
+		size_(0) {}
+
+	virtual ~IStack() {}
+
 	///
 	/// \brief push
 	/// Add data to the stack
@@ -20,14 +25,17 @@ public:
 	/// \brief top
 	/// Get top item in the stack
 	///
-    virtual T top() = 0;
+	virtual T top() const = 0;
 
 	///
 	/// \brief size
 	/// Returns number of items in the stack
 	///
-	virtual int size() = 0;
+	int size() const
+	{
+		return size_;
+	}
 
-private:
+protected:
 	int size_;
 };
