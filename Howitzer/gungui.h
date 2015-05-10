@@ -16,6 +16,9 @@ public:
 	explicit GunGui(QWidget *parent = 0);
 	~GunGui();
 
+protected:
+	void resizeEvent(QResizeEvent *resize);
+
 private slots:
 	void on_angleHSlider_valueChanged(int value);
 
@@ -23,11 +26,14 @@ private slots:
 
 	void on_fireButton_clicked();
 
-	void redraw(qreal width, qreal height, qreal margin = 7);
+	void redraw(qreal width, qreal height, qreal margin);
 
 private:
 	Ui::GunGui *ui;
 
 	GunCore core;
 
+	const qreal viewSceneWidthDifference;
+	const qreal viewSceneHeightDifference;
+	const qreal sceneRectMargin;
 };

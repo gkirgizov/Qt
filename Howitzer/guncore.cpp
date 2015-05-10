@@ -81,11 +81,11 @@ void GunCore::outputResult(const QString &info)
 
 void GunCore::redraw(const QRectF &sizeRect, qreal gunWidth, qreal gunHeight)
 {	
-	scene.setSceneRect(sizeRect);
 	QPainterPath clearPath;
 	clearPath.addRect(scene.sceneRect());
 	scene.setSelectionArea(clearPath);
 	scene.clearSelection();
+	scene.setSceneRect(sizeRect);
 
 	//gun
 	const qreal gunTop = sizeRect.bottom() - gunHeight;

@@ -19,6 +19,7 @@ QRectF TargetGraphicsItem::boundingRect() const
 
 void TargetGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+	rects.clear();
 	rects.push_back(QRectF(left_, top_ + height_ / 3, width_, height_ / 3));
 	rects.push_back(QRectF(left_, top_ + height_ / 6, width_, height_ * 2 / 3));
 	rects.push_back(QRectF(left_, top_, width_, height_));
@@ -34,9 +35,9 @@ int TargetGraphicsItem::getScore(qreal y)
 {
 	const int step = 20;
 	int scores = rects.size() * step;
-	for(QRectF rect : rects)
+	for(const QRectF &rect : rects)
 	{
-		if (y > rect.top() && y < rect.bottom())
+		if (y >= rect.top() && y <= rect.bottom())
 		{
 			return scores;
 		}
